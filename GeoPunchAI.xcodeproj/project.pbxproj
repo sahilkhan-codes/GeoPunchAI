@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */; };
+		3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */; };
+		3FF3E1ED30209F2B00E2EC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EC30209F2B00E2EC1B /* Assets.xcassets */; };
+		3FF3E1F030209F2B00E2EC1B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EF30209F2B00E2EC1B /* Preview Assets.xcassets */; };
+		3FF3E1FA30209F2B00E2EC1B /* GeoPunchAITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1F930209F2B00E2EC1B /* GeoPunchAITests.swift */; };
+		3FF3E20430209F2B00E2EC1B /* GeoPunchAIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E20330209F2B00E2EC1B /* GeoPunchAIUITests.swift */; };
+		3FF3E20630209F2B00E2EC1B /* GeoPunchAIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E20530209F2B00E2EC1B /* GeoPunchAIUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3FF3E1F630209F2B00E2EC1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF3E1DD30209F2A00E2EC1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FF3E1E430209F2A00E2EC1B;
+			remoteInfo = GeoPunchAI;
+		};
+		3FF3E20030209F2B00E2EC1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FF3E1DD30209F2A00E2EC1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FF3E1E430209F2A00E2EC1B;
+			remoteInfo = GeoPunchAI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3FF3E1E530209F2A00E2EC1B /* GeoPunchAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPunchAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAIApp.swift; sourceTree = "<group>"; };
+		3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3FF3E1EC30209F2B00E2EC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3FF3E1EF30209F2B00E2EC1B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3FF3E1F530209F2B00E2EC1B /* GeoPunchAITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoPunchAITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF3E1F930209F2B00E2EC1B /* GeoPunchAITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAITests.swift; sourceTree = "<group>"; };
+		3FF3E1FF30209F2B00E2EC1B /* GeoPunchAIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoPunchAIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF3E20330209F2B00E2EC1B /* GeoPunchAIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAIUITests.swift; sourceTree = "<group>"; };
+		3FF3E20530209F2B00E2EC1B /* GeoPunchAIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3FF3E1E230209F2A00E2EC1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1F230209F2B00E2EC1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1FC30209F2B00E2EC1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FF3E1DC30209F2A00E2EC1B = {
+			isa = PBXGroup;
+			children = (
+				3FF3E1E730209F2A00E2EC1B /* GeoPunchAI */,
+				3FF3E1F830209F2B00E2EC1B /* GeoPunchAITests */,
+				3FF3E20230209F2B00E2EC1B /* GeoPunchAIUITests */,
+				3FF3E1E630209F2A00E2EC1B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3FF3E1E630209F2A00E2EC1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3E1E530209F2A00E2EC1B /* GeoPunchAI.app */,
+				3FF3E1F530209F2B00E2EC1B /* GeoPunchAITests.xctest */,
+				3FF3E1FF30209F2B00E2EC1B /* GeoPunchAIUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3FF3E1E730209F2A00E2EC1B /* GeoPunchAI */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */,
+				3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */,
+				3FF3E1EC30209F2B00E2EC1B /* Assets.xcassets */,
+				3FF3E1EE30209F2B00E2EC1B /* Preview Content */,
+			);
+			path = GeoPunchAI;
+			sourceTree = "<group>";
+		};
+		3FF3E1EE30209F2B00E2EC1B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3E1EF30209F2B00E2EC1B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3FF3E1F830209F2B00E2EC1B /* GeoPunchAITests */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3E1F930209F2B00E2EC1B /* GeoPunchAITests.swift */,
+			);
+			path = GeoPunchAITests;
+			sourceTree = "<group>";
+		};
+		3FF3E20230209F2B00E2EC1B /* GeoPunchAIUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3E20330209F2B00E2EC1B /* GeoPunchAIUITests.swift */,
+				3FF3E20530209F2B00E2EC1B /* GeoPunchAIUITestsLaunchTests.swift */,
+			);
+			path = GeoPunchAIUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3FF3E1E430209F2A00E2EC1B /* GeoPunchAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FF3E20930209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAI" */;
+			buildPhases = (
+				3FF3E1E130209F2A00E2EC1B /* Sources */,
+				3FF3E1E230209F2A00E2EC1B /* Frameworks */,
+				3FF3E1E330209F2A00E2EC1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeoPunchAI;
+			productName = GeoPunchAI;
+			productReference = 3FF3E1E530209F2A00E2EC1B /* GeoPunchAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3FF3E1F430209F2B00E2EC1B /* GeoPunchAITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FF3E20C30209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAITests" */;
+			buildPhases = (
+				3FF3E1F130209F2B00E2EC1B /* Sources */,
+				3FF3E1F230209F2B00E2EC1B /* Frameworks */,
+				3FF3E1F330209F2B00E2EC1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3FF3E1F730209F2B00E2EC1B /* PBXTargetDependency */,
+			);
+			name = GeoPunchAITests;
+			productName = GeoPunchAITests;
+			productReference = 3FF3E1F530209F2B00E2EC1B /* GeoPunchAITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3FF3E1FE30209F2B00E2EC1B /* GeoPunchAIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FF3E20F30209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAIUITests" */;
+			buildPhases = (
+				3FF3E1FB30209F2B00E2EC1B /* Sources */,
+				3FF3E1FC30209F2B00E2EC1B /* Frameworks */,
+				3FF3E1FD30209F2B00E2EC1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3FF3E20130209F2B00E2EC1B /* PBXTargetDependency */,
+			);
+			name = GeoPunchAIUITests;
+			productName = GeoPunchAIUITests;
+			productReference = 3FF3E1FF30209F2B00E2EC1B /* GeoPunchAIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FF3E1DD30209F2A00E2EC1B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					3FF3E1E430209F2A00E2EC1B = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					3FF3E1F430209F2B00E2EC1B = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 3FF3E1E430209F2A00E2EC1B;
+					};
+					3FF3E1FE30209F2B00E2EC1B = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 3FF3E1E430209F2A00E2EC1B;
+					};
+				};
+			};
+			buildConfigurationList = 3FF3E1E030209F2A00E2EC1B /* Build configuration list for PBXProject "GeoPunchAI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3FF3E1DC30209F2A00E2EC1B;
+			productRefGroup = 3FF3E1E630209F2A00E2EC1B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3FF3E1E430209F2A00E2EC1B /* GeoPunchAI */,
+				3FF3E1F430209F2B00E2EC1B /* GeoPunchAITests */,
+				3FF3E1FE30209F2B00E2EC1B /* GeoPunchAIUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3FF3E1E330209F2A00E2EC1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF3E1F030209F2B00E2EC1B /* Preview Assets.xcassets in Resources */,
+				3FF3E1ED30209F2B00E2EC1B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1F330209F2B00E2EC1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1FD30209F2B00E2EC1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FF3E1E130209F2A00E2EC1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */,
+				3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1F130209F2B00E2EC1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF3E1FA30209F2B00E2EC1B /* GeoPunchAITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FF3E1FB30209F2B00E2EC1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF3E20430209F2B00E2EC1B /* GeoPunchAIUITests.swift in Sources */,
+				3FF3E20630209F2B00E2EC1B /* GeoPunchAIUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3FF3E1F730209F2B00E2EC1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FF3E1E430209F2A00E2EC1B /* GeoPunchAI */;
+			targetProxy = 3FF3E1F630209F2B00E2EC1B /* PBXContainerItemProxy */;
+		};
+		3FF3E20130209F2B00E2EC1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FF3E1E430209F2A00E2EC1B /* GeoPunchAI */;
+			targetProxy = 3FF3E20030209F2B00E2EC1B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3FF3E20730209F2B00E2EC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3FF3E20830209F2B00E2EC1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3FF3E20A30209F2B00E2EC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GeoPunchAI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3FF3E20B30209F2B00E2EC1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GeoPunchAI/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3FF3E20D30209F2B00E2EC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoPunchAI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GeoPunchAI";
+			};
+			name = Debug;
+		};
+		3FF3E20E30209F2B00E2EC1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoPunchAI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GeoPunchAI";
+			};
+			name = Release;
+		};
+		3FF3E21030209F2B00E2EC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAIUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GeoPunchAI;
+			};
+			name = Debug;
+		};
+		3FF3E21130209F2B00E2EC1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GeoPuch.GeoPunchAIUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GeoPunchAI;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FF3E1E030209F2A00E2EC1B /* Build configuration list for PBXProject "GeoPunchAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FF3E20730209F2B00E2EC1B /* Debug */,
+				3FF3E20830209F2B00E2EC1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FF3E20930209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FF3E20A30209F2B00E2EC1B /* Debug */,
+				3FF3E20B30209F2B00E2EC1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FF3E20C30209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FF3E20D30209F2B00E2EC1B /* Debug */,
+				3FF3E20E30209F2B00E2EC1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FF3E20F30209F2B00E2EC1B /* Build configuration list for PBXNativeTarget "GeoPunchAIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FF3E21030209F2B00E2EC1B /* Debug */,
+				3FF3E21130209F2B00E2EC1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3FF3E1DD30209F2A00E2EC1B /* Project object */;
+}
