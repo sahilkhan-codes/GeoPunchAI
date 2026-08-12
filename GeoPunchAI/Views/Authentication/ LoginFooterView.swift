@@ -1,8 +1,9 @@
 //
-//   LoginFooterView.swift
+//
+//  LoginFooterView.swift
 //  GeoPunchAI
 //
-//  Created by Student on 04/08/26.
+
 import SwiftUI
 
 struct LoginFooterView: View {
@@ -10,6 +11,26 @@ struct LoginFooterView: View {
     var body: some View {
 
         VStack(spacing: 24) {
+
+            // Register
+
+            NavigationLink {
+
+                RegisterView()
+
+            } label: {
+
+                HStack(spacing: 5) {
+
+                    Text("Don't have an account?")
+
+                    Text("Sign Up")
+                        .fontWeight(.bold)
+
+                }
+                .foregroundColor(AppColors.primary)
+
+            }
 
             HStack {
 
@@ -54,5 +75,7 @@ struct LoginFooterView: View {
 }
 
 #Preview {
-    LoginFooterView()
+    NavigationStack {
+        LoginFooterView()
+    }
 }

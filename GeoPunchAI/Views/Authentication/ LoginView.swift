@@ -1,6 +1,8 @@
 //
-//   LoginView.swift
+//  LoginView.swift
 //  GeoPunchAI
+//
+
 import SwiftUI
 
 struct LoginView: View {
@@ -21,6 +23,8 @@ struct LoginView: View {
 
                     LoginFooterView()
 
+
+                    
                 }
                 .padding(Theme.screenPadding)
 

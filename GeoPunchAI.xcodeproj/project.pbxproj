@@ -30,6 +30,8 @@
 		3FF3E22A3020A56800E2EC1B /*  OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E2293020A56800E2EC1B /*  OnboardingData.swift */; };
 		3FF3E22C3020A61300E2EC1B /*  OnboardingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E22B3020A61300E2EC1B /*  OnboardingCardView.swift */; };
 		3FF3E22E3020A83600E2EC1B /*  LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E22D3020A83600E2EC1B /*  LoginView.swift */; };
+		3FF61CF330249FE80055C1CC /*  RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF61CF230249FE80055C1CC /*  RegisterViewModel.swift */; };
+		3FF61CF53024A1030055C1CC /*  RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF61CF43024A1030055C1CC /*  RegisterView.swift */; };
 		3FFD26893021DCA500A5EF81 /*  DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD26883021DCA500A5EF81 /*  DashboardView.swift */; };
 		3FFD268B3021DDE900A5EF81 /*  StatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD268A3021DDE900A5EF81 /*  StatusCardView.swift */; };
 		3FFD268D3021DF7F00A5EF81 /*  PunchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFD268C3021DF7F00A5EF81 /*  PunchCardView.swift */; };
@@ -83,6 +85,8 @@
 		3FF3E2293020A56800E2EC1B /*  OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " OnboardingData.swift"; sourceTree = "<group>"; };
 		3FF3E22B3020A61300E2EC1B /*  OnboardingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " OnboardingCardView.swift"; sourceTree = "<group>"; };
 		3FF3E22D3020A83600E2EC1B /*  LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginView.swift"; sourceTree = "<group>"; };
+		3FF61CF230249FE80055C1CC /*  RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " RegisterViewModel.swift"; sourceTree = "<group>"; };
+		3FF61CF43024A1030055C1CC /*  RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " RegisterView.swift"; sourceTree = "<group>"; };
 		3FFD26883021DCA500A5EF81 /*  DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " DashboardView.swift"; sourceTree = "<group>"; };
 		3FFD268A3021DDE900A5EF81 /*  StatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " StatusCardView.swift"; sourceTree = "<group>"; };
 		3FFD268C3021DF7F00A5EF81 /*  PunchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " PunchCardView.swift"; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				3FA7D6303021F69F00182C8E /* LoginViewModel.swift */,
+				3FF61CF230249FE80055C1CC /*  RegisterViewModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				3FA7D62A3021F04500182C8E /*  LoginFormView.swift */,
 				3FA7D62C3021F16500182C8E /*  LoginFooterView.swift */,
 				3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */,
+				3FF61CF43024A1030055C1CC /*  RegisterView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				3FF3E22C3020A61300E2EC1B /*  OnboardingCardView.swift in Sources */,
 				3FF3E2283020A4DD00E2EC1B /*  OnboardingItem.swift in Sources */,
 				3FFD26893021DCA500A5EF81 /*  DashboardView.swift in Sources */,
+				3FF61CF330249FE80055C1CC /*  RegisterViewModel.swift in Sources */,
 				3FFD268B3021DDE900A5EF81 /*  StatusCardView.swift in Sources */,
 				3FF3E22A3020A56800E2EC1B /*  OnboardingData.swift in Sources */,
 				3FFD268D3021DF7F00A5EF81 /*  PunchCardView.swift in Sources */,
@@ -485,6 +492,7 @@
 				3FFD26933021E38B00A5EF81 /*  AppFonts.swift in Sources */,
 				3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */,
 				3FF3E22E3020A83600E2EC1B /*  LoginView.swift in Sources */,
+				3FF61CF53024A1030055C1CC /*  RegisterView.swift in Sources */,
 				3FFD26953021E3E000A5EF81 /*  Theme.swift in Sources */,
 				3FFD26973021E45100A5EF81 /*  PrimaryButton.swift in Sources */,
 				3FA7D62B3021F04500182C8E /*  LoginFormView.swift in Sources */,
