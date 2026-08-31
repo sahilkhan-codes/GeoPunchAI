@@ -1,99 +1,41 @@
-//
-//   RegisterViewModel.swift
-//  GeoPunchAI
-//
-//  Created by Student on 06/08/26.
-//
 import Foundation
-import SwiftUI
-import FirebaseFirestore
+import Combine
 
-final class RegisterViewModel: ObservableObject {
-
+class RegisterViewModel: ObservableObject {
+    @Published var name = ""
     @Published var email = ""
     @Published var password = ""
     @Published var confirmPassword = ""
-
-    @Published var isLoading = false
+    @Published var selectedRole: UserRole = .employee
     @Published var errorMessage = ""
-    @Published var registerSuccess = false
-
-    private let db = Firestore.firestore()
-
-    func register() {
-
-        errorMessage = ""
-
-        let cleanEmail = email
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased()
-
-        if cleanEmail.isEmpty {
-            errorMessage = "Please enter your email."
+    @Published var isLoading = false
+    
+    func register(completion: @escaping (Bool) -> Void) {
+        guard !name.isEmpty, !email.isEmpty, !password.isEmpty else {
+            errorMessage = "Please enter all details."
+            completion(false)
             return
         }
-
-        if password.count < 6 {
-            errorMessage = "Password must be at least 6 characters."
-            return
-        }
-
-        if password != confirmPassword {
+        
+        guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
+            completion(false)
             return
         }
-
+        
         isLoading = true
-
-        AuthManager.shared.register(
-            email: cleanEmail,
-            password: password
-        ) { [weak self] result in
-
-            guard let self = self else { return }
-
-            switch result {
-
-            case .success(let user):
-
-                // Save user profile in Firestore
-                let userData: [String: Any] = [
-                    "uid": user.uid,
-                    "email": cleanEmail,
-                    "role": "employee",
-                    "createdAt": Timestamp(date: Date())
-                ]
-
-                self.db
-                    .collection("users")
-                    .document(user.uid)
-                    .setData(userData) { error in
-
-                        if let error = error {
-                            print("⚠️ Firestore error: \(error.localizedDescription)")
-                        } else {
-                            print("✅ Firestore user profile saved")
-                        }
-                    }
-
-                // IMPORTANT:
-                // Open Dashboard immediately after Firebase Auth succeeds.
-                DispatchQueue.main.async {
-
-                    self.isLoading = false
-                    self.registerSuccess = true
-
-                    print("🚀 registerSuccess = TRUE")
-                }
-
-            case .failure(let error):
-
-                DispatchQueue.main.async {
-
-                    self.isLoading = false
-                    self.errorMessage = error.localizedDescription
-
-                    print("❌ Registration error: \(error.localizedDescription)")
+        errorMessage = ""
+        
+        // Added 'name: name' parameter here
+        AuthManager.shared.register(name: name, email: email, password: password, role: selectedRole) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result {
+                case .success:
+                    completion(true)
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                    completion(false)
                 }
             }
         }

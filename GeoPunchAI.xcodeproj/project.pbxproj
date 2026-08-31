@@ -13,10 +13,17 @@
 		3F0B0E5B302351A200124FED /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0B0E5A302351A200124FED /* FirebaseMessaging */; };
 		3F0B0E5D302351A200124FED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0B0E5C302351A200124FED /* FirebaseStorage */; };
 		3F0B0E5F302352EF00124FED /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0B0E5E302352EF00124FED /* AuthManager.swift */; };
+		3F55FAED303C04E2008C207D /*  adminDashbardview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55FAEC303C04E2008C207D /*  adminDashbardview.swift */; };
+		3F55FAEF303C059A008C207D /*  GeofenceSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55FAEE303C059A008C207D /*  GeofenceSetupView.swift */; };
+		3F55FAF1303C05DA008C207D /*  userRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55FAF0303C05DA008C207D /*  userRole.swift */; };
+		3F55FAF3303C09CE008C207D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55FAF2303C09CD008C207D /* LocationManager.swift */; };
 		3FA7D62B3021F04500182C8E /*  LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62A3021F04500182C8E /*  LoginFormView.swift */; };
 		3FA7D62D3021F16500182C8E /*  LoginFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62C3021F16500182C8E /*  LoginFooterView.swift */; };
 		3FA7D62F3021F23100182C8E /*  LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */; };
 		3FA7D6313021F69F00182C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D6303021F69F00182C8E /* LoginViewModel.swift */; };
+		3FB0C4E630453A2200A01DCA /*  FaceCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */; };
+		3FB0C4E830453B7F00A01DCA /*  AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */; };
+		3FB0C4EA30453BBF00A01DCA /*  AttendanceLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */; };
 		3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */; };
 		3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */; };
 		3FF3E1ED30209F2B00E2EC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EC30209F2B00E2EC1B /* Assets.xcassets */; };
@@ -65,10 +72,17 @@
 /* Begin PBXFileReference section */
 		3F02EFB3302311DD004D3145 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F0B0E5E302352EF00124FED /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		3F55FAEC303C04E2008C207D /*  adminDashbardview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " adminDashbardview.swift"; sourceTree = "<group>"; };
+		3F55FAEE303C059A008C207D /*  GeofenceSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " GeofenceSetupView.swift"; sourceTree = "<group>"; };
+		3F55FAF0303C05DA008C207D /*  userRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " userRole.swift"; sourceTree = "<group>"; };
+		3F55FAF2303C09CD008C207D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3FA7D62A3021F04500182C8E /*  LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginFormView.swift"; sourceTree = "<group>"; };
 		3FA7D62C3021F16500182C8E /*  LoginFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginFooterView.swift"; sourceTree = "<group>"; };
 		3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginHeaderView.swift"; sourceTree = "<group>"; };
 		3FA7D6303021F69F00182C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FaceCameraView.swift"; sourceTree = "<group>"; };
+		3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceRecord.swift"; sourceTree = "<group>"; };
+		3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceLogsView.swift"; sourceTree = "<group>"; };
 		3FF3E1E530209F2A00E2EC1B /* GeoPunchAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPunchAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAIApp.swift; sourceTree = "<group>"; };
 		3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -206,6 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				3FF3E2273020A4DD00E2EC1B /*  OnboardingItem.swift */,
+				3F55FAF0303C05DA008C207D /*  userRole.swift */,
+				3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -243,6 +259,7 @@
 		3FF3E21730209FAB00E2EC1B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				3F55FAF2303C09CD008C207D /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -305,6 +322,9 @@
 			isa = PBXGroup;
 			children = (
 				3FFD26883021DCA500A5EF81 /*  DashboardView.swift */,
+				3F55FAEC303C04E2008C207D /*  adminDashbardview.swift */,
+				3F55FAEE303C059A008C207D /*  GeofenceSetupView.swift */,
+				3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -312,6 +332,7 @@
 		3FF3E2203020A10D00E2EC1B /* Attendance */ = {
 			isa = PBXGroup;
 			children = (
+				3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */,
 			);
 			path = Attendance;
 			sourceTree = "<group>";
@@ -472,12 +493,17 @@
 			files = (
 				3FA7D6313021F69F00182C8E /* LoginViewModel.swift in Sources */,
 				3F0B0E5F302352EF00124FED /* AuthManager.swift in Sources */,
+				3F55FAF3303C09CE008C207D /* LocationManager.swift in Sources */,
 				3FF3E21C3020A05300E2EC1B /*  SplashViews.swift in Sources */,
 				3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */,
+				3F55FAF1303C05DA008C207D /*  userRole.swift in Sources */,
+				3FB0C4E630453A2200A01DCA /*  FaceCameraView.swift in Sources */,
 				3FA7D62D3021F16500182C8E /*  LoginFooterView.swift in Sources */,
+				3FB0C4E830453B7F00A01DCA /*  AttendanceRecord.swift in Sources */,
 				3FFD26913021E32100A5EF81 /*  AppColors.swift in Sources */,
 				3FA7D62F3021F23100182C8E /*  LoginHeaderView.swift in Sources */,
 				3FFD26993021E4EF00A5EF81 /*  AppCard.swift in Sources */,
+				3F55FAED303C04E2008C207D /*  adminDashbardview.swift in Sources */,
 				3FFD268F3021E08300A5EF81 /*  BottomNavigationView.swift in Sources */,
 				3FF3E22C3020A61300E2EC1B /*  OnboardingCardView.swift in Sources */,
 				3FF3E2283020A4DD00E2EC1B /*  OnboardingItem.swift in Sources */,
@@ -493,9 +519,11 @@
 				3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */,
 				3FF3E22E3020A83600E2EC1B /*  LoginView.swift in Sources */,
 				3FF61CF53024A1030055C1CC /*  RegisterView.swift in Sources */,
+				3FB0C4EA30453BBF00A01DCA /*  AttendanceLogsView.swift in Sources */,
 				3FFD26953021E3E000A5EF81 /*  Theme.swift in Sources */,
 				3FFD26973021E45100A5EF81 /*  PrimaryButton.swift in Sources */,
 				3FA7D62B3021F04500182C8E /*  LoginFormView.swift in Sources */,
+				3F55FAEF303C059A008C207D /*  GeofenceSetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +689,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GeoPunchAI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture your face for attendance verification.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to verify if you are within the attendance geofence.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -689,6 +721,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GeoPunchAI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture your face for attendance verification.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to verify if you are within the attendance geofence.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

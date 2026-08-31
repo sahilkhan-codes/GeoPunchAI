@@ -1,18 +1,25 @@
-//
-//  ContentView.swift
-//  GeoPunchAI
-//
-//  Created by Student on 03/08/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var authManager = AuthManager.shared
+    
     var body: some View {
-        SplashView()
+        Group {
+            if authManager.userSession != nil {
+                if authManager.currentUserRole == .admin {
+                    AdminDashboardView()
+                } else {
+                    DashboardView()
+                }
+            } else {
+                LoginView()
+            }
+        }
+        .onAppear {
+            if authManager.userSession != nil {
+                authManager.fetchUserRole()
+            }
+        }
+         
     }
-}
-
-#Preview {
-    ContentView()
 }
