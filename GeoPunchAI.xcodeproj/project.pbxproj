@@ -22,9 +22,12 @@
 		3FA7D62F3021F23100182C8E /*  LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */; };
 		3FA7D6313021F69F00182C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D6303021F69F00182C8E /* LoginViewModel.swift */; };
 		3FB075693046C5B700E106BD /*  AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB075683046C5B700E106BD /*  AttendanceManager.swift */; };
+		3FB0756B3046CCCE00E106BD /*  RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0756A3046CCCE00E106BD /*  RootView.swift */; };
 		3FB0C4E630453A2200A01DCA /*  FaceCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */; };
 		3FB0C4E830453B7F00A01DCA /*  AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */; };
 		3FB0C4EA30453BBF00A01DCA /*  AttendanceLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */; };
+		3FBC47763046DB1C00445B44 /*  AdminGeofenceSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC47753046DB1C00445B44 /*  AdminGeofenceSetupView.swift */; };
+		3FBC47783046E11600445B44 /*  EmployeeCheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC47773046E11600445B44 /*  EmployeeCheckInView.swift */; };
 		3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */; };
 		3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */; };
 		3FF3E1ED30209F2B00E2EC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF3E1EC30209F2B00E2EC1B /* Assets.xcassets */; };
@@ -82,9 +85,12 @@
 		3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginHeaderView.swift"; sourceTree = "<group>"; };
 		3FA7D6303021F69F00182C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3FB075683046C5B700E106BD /*  AttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceManager.swift"; sourceTree = "<group>"; };
+		3FB0756A3046CCCE00E106BD /*  RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " RootView.swift"; sourceTree = "<group>"; };
 		3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FaceCameraView.swift"; sourceTree = "<group>"; };
 		3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceRecord.swift"; sourceTree = "<group>"; };
 		3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceLogsView.swift"; sourceTree = "<group>"; };
+		3FBC47753046DB1C00445B44 /*  AdminGeofenceSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AdminGeofenceSetupView.swift"; sourceTree = "<group>"; };
+		3FBC47773046E11600445B44 /*  EmployeeCheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " EmployeeCheckInView.swift"; sourceTree = "<group>"; };
 		3FF3E1E530209F2A00E2EC1B /* GeoPunchAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoPunchAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF3E1E830209F2A00E2EC1B /* GeoPunchAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPunchAIApp.swift; sourceTree = "<group>"; };
 		3FF3E1EA30209F2A00E2EC1B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 				3FF3E21F3020A10000E2EC1B /* Dashboard */,
 				3FF3E21E3020A0EA00E2EC1B /* Authentication */,
 				3FF3E21A3020A00D00E2EC1B /* common */,
+				3FB0756A3046CCCE00E106BD /*  RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +331,7 @@
 		3FF3E21F3020A10000E2EC1B /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				3FBC47753046DB1C00445B44 /*  AdminGeofenceSetupView.swift */,
 				3FFD26883021DCA500A5EF81 /*  DashboardView.swift */,
 				3F55FAEC303C04E2008C207D /*  adminDashbardview.swift */,
 				3F55FAEE303C059A008C207D /*  GeofenceSetupView.swift */,
@@ -336,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */,
+				3FBC47773046E11600445B44 /*  EmployeeCheckInView.swift */,
 			);
 			path = Attendance;
 			sourceTree = "<group>";
@@ -496,6 +505,7 @@
 			files = (
 				3FA7D6313021F69F00182C8E /* LoginViewModel.swift in Sources */,
 				3F0B0E5F302352EF00124FED /* AuthManager.swift in Sources */,
+				3FBC47783046E11600445B44 /*  EmployeeCheckInView.swift in Sources */,
 				3F55FAF3303C09CE008C207D /* LocationManager.swift in Sources */,
 				3FF3E21C3020A05300E2EC1B /*  SplashViews.swift in Sources */,
 				3FF3E1EB30209F2A00E2EC1B /* ContentView.swift in Sources */,
@@ -507,6 +517,7 @@
 				3FA7D62F3021F23100182C8E /*  LoginHeaderView.swift in Sources */,
 				3FFD26993021E4EF00A5EF81 /*  AppCard.swift in Sources */,
 				3F55FAED303C04E2008C207D /*  adminDashbardview.swift in Sources */,
+				3FBC47763046DB1C00445B44 /*  AdminGeofenceSetupView.swift in Sources */,
 				3FFD268F3021E08300A5EF81 /*  BottomNavigationView.swift in Sources */,
 				3FF3E22C3020A61300E2EC1B /*  OnboardingCardView.swift in Sources */,
 				3FF3E2283020A4DD00E2EC1B /*  OnboardingItem.swift in Sources */,
@@ -518,6 +529,7 @@
 				3FFD268D3021DF7F00A5EF81 /*  PunchCardView.swift in Sources */,
 				3FFD269B3021E59D00A5EF81 /*  CustomTextField.swift in Sources */,
 				3FF3E2263020A2F800E2EC1B /*  OnboardingView.swift in Sources */,
+				3FB0756B3046CCCE00E106BD /*  RootView.swift in Sources */,
 				3FFD269D3021E5FC00A5EF81 /*  SecureTextField.swift in Sources */,
 				3FFD26933021E38B00A5EF81 /*  AppFonts.swift in Sources */,
 				3FF3E1E930209F2A00E2EC1B /* GeoPunchAIApp.swift in Sources */,

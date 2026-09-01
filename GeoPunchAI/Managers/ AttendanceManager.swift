@@ -12,7 +12,41 @@ class AttendanceManager: ObservableObject {
     
     private init() {}
     
-    // 1. Punch In Action
+    func logAttendance(type: String, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let currentUser = AuthManager.shared.currentUserData else {
+            completion(.failure(NSError(domain: "AttendanceManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User authentication missing."])))
+            return
+        }
+        
+        let isInside = LocationManager.shared.isInsideGeofence
+        
+        if type == "PUNCH_IN" {
+            punchIn(userId: currentUser.id, userName: currentUser.name, location: location, isInside: isInside) { success in
+                if success {
+                    completion(.success(()))
+                } else {
+                    let err = NSError(domain: "AttendanceManager", code: 500, userInfo: [NSLocalizedDescriptionKey: self.errorMessage ?? "Punch In Failed"])
+                    completion(.failure(err))
+                }
+            }
+        } else {
+            guard let activeRecordId = activeRecord?.id else {
+                let err = NSError(domain: "AttendanceManager", code: 404, userInfo: [NSLocalizedDescriptionKey: "No active shift found for punch out."])
+                completion(.failure(err))
+                return
+            }
+            
+            punchOut(recordId: activeRecordId) { success in
+                if success {
+                    completion(.success(()))
+                } else {
+                    let err = NSError(domain: "AttendanceManager", code: 500, userInfo: [NSLocalizedDescriptionKey: self.errorMessage ?? "Punch Out Failed"])
+                    completion(.failure(err))
+                }
+            }
+        }
+    }
+    
     func punchIn(userId: String, userName: String, location: CLLocationCoordinate2D?, isInside: Bool, completion: @escaping (Bool) -> Void) {
         isProcessing = true
         errorMessage = nil
@@ -55,7 +89,6 @@ class AttendanceManager: ObservableObject {
         }
     }
     
-    // 2. Punch Out Action
     func punchOut(recordId: String, completion: @escaping (Bool) -> Void) {
         isProcessing = true
         errorMessage = nil
@@ -63,7 +96,7 @@ class AttendanceManager: ObservableObject {
         let checkOutDate = Date()
         
         db.collection("attendance_logs").document(recordId).getDocument { snapshot, error in
-            guard let snapshot = snapshot, snapshot.exists, var record = try? snapshot.data(as: AttendanceRecord.self) else {
+            guard let snapshot = snapshot, snapshot.exists, let record = try? snapshot.data(as: AttendanceRecord.self) else {
                 DispatchQueue.main.async {
                     self.isProcessing = false
                     self.errorMessage = "Record not found."
@@ -93,15 +126,16 @@ class AttendanceManager: ObservableObject {
         }
     }
     
-    // 3. Fetch Active Shift for Current User
     func fetchActiveShift(userId: String) {
         db.collection("attendance_logs")
             .whereField("userId", isEqualTo: userId)
             .whereField("status", isEqualTo: "ACTIVE")
-            .getDocuments { snapshot, error in
-                if let documents = snapshot?.documents, let doc = documents.first {
-                    DispatchQueue.main.async {
+            .addSnapshotListener { snapshot, error in
+                DispatchQueue.main.async {
+                    if let documents = snapshot?.documents, let doc = documents.first {
                         self.activeRecord = try? doc.data(as: AttendanceRecord.self)
+                    } else {
+                        self.activeRecord = nil
                     }
                 }
             }
