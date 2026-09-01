@@ -21,6 +21,7 @@
 		3FA7D62D3021F16500182C8E /*  LoginFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62C3021F16500182C8E /*  LoginFooterView.swift */; };
 		3FA7D62F3021F23100182C8E /*  LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */; };
 		3FA7D6313021F69F00182C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D6303021F69F00182C8E /* LoginViewModel.swift */; };
+		3FB075693046C5B700E106BD /*  AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB075683046C5B700E106BD /*  AttendanceManager.swift */; };
 		3FB0C4E630453A2200A01DCA /*  FaceCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */; };
 		3FB0C4E830453B7F00A01DCA /*  AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */; };
 		3FB0C4EA30453BBF00A01DCA /*  AttendanceLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */; };
@@ -80,6 +81,7 @@
 		3FA7D62C3021F16500182C8E /*  LoginFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginFooterView.swift"; sourceTree = "<group>"; };
 		3FA7D62E3021F23100182C8E /*  LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LoginHeaderView.swift"; sourceTree = "<group>"; };
 		3FA7D6303021F69F00182C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		3FB075683046C5B700E106BD /*  AttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceManager.swift"; sourceTree = "<group>"; };
 		3FB0C4E530453A2200A01DCA /*  FaceCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FaceCameraView.swift"; sourceTree = "<group>"; };
 		3FB0C4E730453B7F00A01DCA /*  AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceRecord.swift"; sourceTree = "<group>"; };
 		3FB0C4E930453BBF00A01DCA /*  AttendanceLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AttendanceLogsView.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				3F55FAF2303C09CD008C207D /* LocationManager.swift */,
+				3FB075683046C5B700E106BD /*  AttendanceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				3FFD26893021DCA500A5EF81 /*  DashboardView.swift in Sources */,
 				3FF61CF330249FE80055C1CC /*  RegisterViewModel.swift in Sources */,
 				3FFD268B3021DDE900A5EF81 /*  StatusCardView.swift in Sources */,
+				3FB075693046C5B700E106BD /*  AttendanceManager.swift in Sources */,
 				3FF3E22A3020A56800E2EC1B /*  OnboardingData.swift in Sources */,
 				3FFD268D3021DF7F00A5EF81 /*  PunchCardView.swift in Sources */,
 				3FFD269B3021E59D00A5EF81 /*  CustomTextField.swift in Sources */,

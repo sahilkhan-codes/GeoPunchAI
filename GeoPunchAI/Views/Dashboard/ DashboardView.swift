@@ -1,18 +1,22 @@
 import SwiftUI
+import CoreLocation
 
 struct DashboardView: View {
     @ObservedObject var authManager = AuthManager.shared
+    @StateObject private var locationManager = LocationManager.shared
+    @StateObject private var attendanceManager = AttendanceManager.shared
     
-    @State private var isCheckedIn = false
-    @State private var checkInTime: Date?
     @State private var elapsedTime: TimeInterval = 0
     @State private var timer: Timer?
     @State private var showCameraScanner = false
     
+    var isCheckedIn: Bool {
+        attendanceManager.activeRecord != nil
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                // Dynamic Background Gradient
                 LinearGradient(
                     colors: [Color(.systemGroupedBackground), Color(.systemBackground)],
                     startPoint: .topLeading,
@@ -102,7 +106,7 @@ struct DashboardView: View {
                                 )
                                 .padding(.vertical, 4)
                             
-                            Text(isCheckedIn ? "Live Session Tracked" : "Tap Punch to start your working shift")
+                            Text(isCheckedIn ? "Live Session Tracked in Cloud" : "Tap Punch to start your working shift")
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
@@ -116,15 +120,14 @@ struct DashboardView: View {
                         )
                         .padding(.horizontal)
                         
-                        // Summary Metrics Section (Glassmorphic Cards)
+                        // Summary Metrics Section
                         VStack(alignment: .leading, spacing: 14) {
-                            Text("Summary & Logs")
+                            Text("Summary & Location Logs")
                                 .font(.title3)
                                 .fontWeight(.bold)
                                 .padding(.horizontal, 4)
                             
                             HStack(spacing: 14) {
-                                // Check-in Metric Card
                                 VStack(alignment: .leading, spacing: 12) {
                                     Image(systemName: "arrow.down.left.circle.fill")
                                         .font(.title2)
@@ -135,7 +138,7 @@ struct DashboardView: View {
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                         
-                                        Text(checkInTime != nil ? timeString(date: checkInTime!) : "--:--")
+                                        Text(attendanceManager.activeRecord != nil ? timeString(date: attendanceManager.activeRecord!.checkInTime) : "--:--")
                                             .font(.headline)
                                             .fontWeight(.bold)
                                     }
@@ -146,21 +149,20 @@ struct DashboardView: View {
                                 .cornerRadius(20)
                                 .shadow(color: Color.black.opacity(0.02), radius: 10, x: 0, y: 4)
                                 
-                                // Status Metric Card
                                 VStack(alignment: .leading, spacing: 12) {
-                                    Image(systemName: "checkmark.shield.fill")
+                                    Image(systemName: locationManager.isInsideGeofence ? "checkmark.shield.fill" : "xmark.shield.fill")
                                         .font(.title2)
-                                        .foregroundColor(isCheckedIn ? .green : .gray)
+                                        .foregroundColor(locationManager.isInsideGeofence ? .green : .red)
                                     
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text("Location Status")
+                                        Text("Geofence Status")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                         
-                                        Text(isCheckedIn ? "Inside Geofence" : "Ready")
+                                        Text(locationManager.isInsideGeofence ? "Inside Office" : "Outside Office")
                                             .font(.headline)
                                             .fontWeight(.bold)
-                                            .foregroundColor(isCheckedIn ? .green : .primary)
+                                            .foregroundColor(locationManager.isInsideGeofence ? .green : .red)
                                     }
                                 }
                                 .padding(16)
@@ -169,32 +171,52 @@ struct DashboardView: View {
                                 .cornerRadius(20)
                                 .shadow(color: Color.black.opacity(0.02), radius: 10, x: 0, y: 4)
                             }
+                            
+                            HStack(spacing: 10) {
+                                Image(systemName: "location.fill")
+                                    .foregroundColor(.blue)
+                                Text(locationManager.geofenceStatusMessage)
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.horizontal, 8)
                         }
                         .padding(.horizontal)
                         
-                        // Action Button
+                        // Punch Action Button
                         Button(action: {
-                            showCameraScanner = true
+                            if locationManager.isInsideGeofence || isCheckedIn {
+                                showCameraScanner = true
+                            }
                         }) {
                             HStack(spacing: 10) {
-                                Image(systemName: isCheckedIn ? "arrow.right.to.line.circle.fill" : "camera.metering.matrix")
-                                    .font(.title3)
-                                
-                                Text(isCheckedIn ? "Punch Check-Out" : "Scan Face & Punch In")
-                                    .font(.headline)
-                                    .fontWeight(.semibold)
+                                if attendanceManager.isProcessing {
+                                    ProgressView()
+                                        .tint(.white)
+                                } else {
+                                    Image(systemName: isCheckedIn ? "arrow.right.to.line.circle.fill" : "camera.metering.matrix")
+                                        .font(.title3)
+                                    
+                                    Text(isCheckedIn ? "Punch Check-Out" : (locationManager.isInsideGeofence ? "Scan Face & Punch In" : "Out of Office Range"))
+                                        .font(.headline)
+                                        .fontWeight(.semibold)
+                                }
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
                             .background(
                                 isCheckedIn ?
                                 LinearGradient(colors: [.red, .orange], startPoint: .leading, endPoint: .trailing) :
-                                LinearGradient(colors: [.blue, .indigo], startPoint: .leading, endPoint: .trailing)
+                                (locationManager.isInsideGeofence ?
+                                 LinearGradient(colors: [.blue, .indigo], startPoint: .leading, endPoint: .trailing) :
+                                 LinearGradient(colors: [.gray, .gray.opacity(0.8)], startPoint: .leading, endPoint: .trailing))
                             )
                             .foregroundColor(.white)
                             .cornerRadius(18)
-                            .shadow(color: (isCheckedIn ? Color.red : Color.blue).opacity(0.3), radius: 12, x: 0, y: 6)
+                            .shadow(color: (isCheckedIn ? Color.red : (locationManager.isInsideGeofence ? Color.blue : Color.clear)).opacity(0.3), radius: 12, x: 0, y: 6)
                         }
+                        .disabled(!locationManager.isInsideGeofence && !isCheckedIn || attendanceManager.isProcessing)
                         .padding(.horizontal)
                         .padding(.top, 8)
                     }
@@ -202,6 +224,21 @@ struct DashboardView: View {
                 }
             }
             .navigationBarHidden(true)
+            .onAppear {
+                locationManager.requestLocationPermission()
+                locationManager.setTargetGeofence(latitude: 28.5355, longitude: 77.3910, radius: 100.0)
+                
+                if let userId = authManager.currentUserData?.id {
+                    attendanceManager.fetchActiveShift(userId: userId)
+                }
+            }
+            .onChange(of: attendanceManager.activeRecord?.checkInTime) { newCheckInTime in
+                if let startTime = newCheckInTime {
+                    startTimer(from: startTime)
+                } else {
+                    stopTimer()
+                }
+            }
             .sheet(isPresented: $showCameraScanner) {
                 VStack(spacing: 24) {
                     Capsule()
@@ -231,7 +268,7 @@ struct DashboardView: View {
                         .padding(.horizontal, 32)
                     
                     Button(action: {
-                        toggleCheckInState()
+                        handleAttendancePunch()
                         showCameraScanner = false
                     }) {
                         Text("Confirm Verification")
@@ -257,26 +294,46 @@ struct DashboardView: View {
         }
     }
     
-    private func toggleCheckInState() {
-        if isCheckedIn {
-            isCheckedIn = false
-            timer?.invalidate()
-            timer = nil
+    private func handleAttendancePunch() {
+        guard let user = authManager.currentUserData else { return }
+        
+        if let activeRecord = attendanceManager.activeRecord, let recordId = activeRecord.id {
+            // Punch Out
+            attendanceManager.punchOut(recordId: recordId) { success in
+                if success {
+                    stopTimer()
+                }
+            }
         } else {
-            isCheckedIn = true
-            checkInTime = Date()
-            elapsedTime = 0
-            
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                if let startTime = checkInTime {
-                    elapsedTime = Date().timeIntervalSince(startTime)
+            // Punch In
+            attendanceManager.punchIn(
+                userId: user.id,
+                userName: user.name,
+                location: locationManager.userLocation?.coordinate,
+                isInside: locationManager.isInsideGeofence
+            ) { success in
+                if success, let startTime = attendanceManager.activeRecord?.checkInTime {
+                    startTimer(from: startTime)
                 }
             }
         }
     }
     
-    private func handleLogout() {
+    private func startTimer(from date: Date) {
+        stopTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            elapsedTime = Date().timeIntervalSince(date)
+        }
+    }
+    
+    private func stopTimer() {
         timer?.invalidate()
+        timer = nil
+        elapsedTime = 0
+    }
+    
+    private func handleLogout() {
+        stopTimer()
         try? authManager.logout()
     }
     
