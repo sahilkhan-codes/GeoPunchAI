@@ -6,7 +6,7 @@ struct AdminGeofenceSetupView: View {
     @Environment(\.dismiss) private var dismiss
     private let db = Firestore.firestore()
     
-    // Form Inputs (Empty defaults - No hardcoding)
+    // Form Inputs
     @State private var latitudeString: String = ""
     @State private var longitudeString: String = ""
     @State private var radiusString: String = ""
@@ -30,85 +30,66 @@ struct AdminGeofenceSetupView: View {
                 if isLoading {
                     VStack(spacing: 16) {
                         ProgressView()
-                            .scaleEffect(1.2)
                         Text("Fetching Geofence Configuration...")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
                 } else {
                     Form {
-                        // MARK: - Section 1: Live Interactive Map
-                        Section(header: Text("Target Office Location")) {
-                            ZStack {
-                                Map(position: $cameraPosition)
-                                    .frame(height: 240)
-                                    .cornerRadius(12)
-                                
-                                Image(systemName: "mappin.circle.fill")
-                                    .font(.system(size: 38))
-                                    .foregroundColor(.red)
-                                    .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
-                            }
-                            .padding(.vertical, 4)
-                            
-                            Button(action: useCurrentLocationAsOffice) {
-                                HStack {
-                                    Image(systemName: "location.fill")
-                                    Text("Set To My Current Device Location")
-                                }
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                            }
-                        }
-                        
-                        // MARK: - Section 2: Parameters Configuration
-                        Section(header: Text("Geofence Parameters")) {
+                        Section(header: Text("Current Device Location")) {
                             HStack {
                                 Text("Latitude")
-                                    .frame(width: 110, alignment: .leading)
-                                TextField("Fetch/Enter Latitude", text: $latitudeString)
-                                    .keyboardType(.decimalPad)
-                                    .multilineTextAlignment(.trailing)
+                                Spacer()
+                                Text(locationManager.userLocation != nil ? String(format: "%.5f", locationManager.userLocation!.latitude) : "Locating...")
+                                    .foregroundColor(.secondary)
                             }
                             
                             HStack {
                                 Text("Longitude")
-                                    .frame(width: 110, alignment: .leading)
-                                TextField("Fetch/Enter Longitude", text: $longitudeString)
-                                    .keyboardType(.decimalPad)
-                                    .multilineTextAlignment(.trailing)
+                                Spacer()
+                                Text(locationManager.userLocation != nil ? String(format: "%.5f", locationManager.userLocation!.longitude) : "Locating...")
+                                    .foregroundColor(.secondary)
                             }
                             
-                            HStack {
-                                Text("Radius (Meters)")
-                                    .frame(width: 130, alignment: .leading)
-                                TextField("e.g. 100", text: $radiusString)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                            Button("Use Current Location As Target") {
+                                if let loc = locationManager.userLocation {
+                                    latitudeString = String(loc.latitude)
+                                    longitudeString = String(loc.longitude)
+                                }
                             }
+                            .font(.subheadline)
                         }
                         
-                        // MARK: - Section 3: Production Save Action
+                        Section(header: Text("Geofence Parameters")) {
+                            TextField("Target Latitude", text: $latitudeString)
+                                .keyboardType(.decimalPad)
+                            
+                            TextField("Target Longitude", text: $longitudeString)
+                                .keyboardType(.decimalPad)
+                            
+                            TextField("Geofence Radius (Meters)", text: $radiusString)
+                                .keyboardType(.numberPad)
+                        }
+                        
                         Section {
-                            Button(action: saveGeofenceToFirestore) {
+                            Button(action: saveGeofenceConfig) {
                                 HStack {
                                     Spacer()
                                     if isSaving {
                                         ProgressView()
-                                            .padding(.trailing, 8)
+                                            .padding(.trailing, 6)
                                     }
-                                    Text(isSaving ? "Updating Database..." : "Publish Geofence Settings")
+                                    Text("Save Geofence")
                                         .fontWeight(.bold)
                                     Spacer()
                                 }
                             }
-                            .disabled(isSaving || latitudeString.isEmpty || longitudeString.isEmpty || radiusString.isEmpty)
-                            .foregroundColor(isSaving ? .gray : .blue)
+                            .disabled(isSaving)
                         }
                     }
                 }
             }
-            .navigationTitle("Geofence Setup")
+            .navigationTitle("Admin Geofence Setup")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -116,12 +97,6 @@ struct AdminGeofenceSetupView: View {
                         dismiss()
                     }
                 }
-            }
-            .onAppear(perform: loadCurrentGeofenceSettings)
-            .onMapCameraChange(frequency: .continuous) { context in
-                let center = context.region.center
-                latitudeString = String(format: "%.6f", center.latitude)
-                longitudeString = String(format: "%.6f", center.longitude)
             }
             .alert(alertTitle, isPresented: $showAlert) {
                 Button("OK") {
@@ -132,73 +107,49 @@ struct AdminGeofenceSetupView: View {
             } message: {
                 Text(alertMessage)
             }
-        }
-    }
-    
-    // MARK: - Production Logic Handlers
-    
-    private func loadCurrentGeofenceSettings() {
-        isLoading = true
-        db.collection("settings").document("geofence").getDocument { snapshot, error in
-            DispatchQueue.main.async {
-                self.isLoading = false
-                
-                if let error = error {
-                    self.triggerAlert(title: "Network Error", message: error.localizedDescription, success: false)
-                    return
-                }
-                
-                if let snapshot = snapshot, snapshot.exists, let data = snapshot.data() {
-                    // Extract exact values saved by admin in Firestore
-                    if let lat = data["latitude"] as? Double,
-                       let lng = data["longitude"] as? Double,
-                       let radius = data["radius"] as? Double {
-                        
-                        self.latitudeString = String(format: "%.6f", lat)
-                        self.longitudeString = String(format: "%.6f", lng)
-                        self.radiusString = String(format: "%.0f", radius)
-                        
-                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-                        self.cameraPosition = .region(MKCoordinateRegion(
-                            center: coordinate,
-                            span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-                        ))
-                        return
-                    }
-                }
-                
-                // If configuration doesn't exist yet, fetch device current GPS position
-                self.useCurrentLocationAsOffice()
+            .onAppear {
+                fetchExistingGeofence()
             }
         }
     }
     
-    private func useCurrentLocationAsOffice() {
-        if let currentCoord = locationManager.userLocation {
-            latitudeString = String(format: "%.6f", currentCoord.latitude)
-            longitudeString = String(format: "%.6f", currentCoord.longitude)
-            cameraPosition = .region(MKCoordinateRegion(
-                center: currentCoord,
-                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-            ))
-        } else {
-            triggerAlert(title: "Location Unavailable", message: "Please ensure location services are enabled for this app.", success: false)
+    private func fetchExistingGeofence() {
+        db.collection("settings").document("geofence").getDocument { snapshot, error in
+            DispatchQueue.main.async {
+                self.isLoading = false
+                if let data = snapshot?.data(), snapshot?.exists == true {
+                    if let lat = data["latitude"] as? Double {
+                        self.latitudeString = String(lat)
+                    }
+                    if let lon = data["longitude"] as? Double {
+                        self.longitudeString = String(lon)
+                    }
+                    if let rad = data["radius"] as? Double {
+                        self.radiusString = String(Int(rad))
+                    }
+                } else {
+                    // Default values if no config exists in Firestore
+                    self.latitudeString = "28.5355"
+                    self.longitudeString = "77.3910"
+                    self.radiusString = "100"
+                }
+            }
         }
     }
     
-    private func saveGeofenceToFirestore() {
+    private func saveGeofenceConfig() {
         guard let lat = Double(latitudeString),
-              let lng = Double(longitudeString),
-              let radius = Double(radiusString), radius > 0 else {
-            triggerAlert(title: "Invalid Input", message: "Please provide valid numeric coordinates and a non-zero radius.", success: false)
+              let lon = Double(longitudeString),
+              let rad = Double(radiusString) else {
+            displayAlert(title: "Invalid Input", message: "Numeric values enter karein latitude, longitude aur radius ke liye.", success: false)
             return
         }
         
         isSaving = true
         let geofenceData: [String: Any] = [
             "latitude": lat,
-            "longitude": lng,
-            "radius": radius,
+            "longitude": lon,
+            "radius": rad,
             "updatedAt": FieldValue.serverTimestamp()
         ]
         
@@ -206,16 +157,16 @@ struct AdminGeofenceSetupView: View {
             DispatchQueue.main.async {
                 self.isSaving = false
                 if let error = error {
-                    self.triggerAlert(title: "Update Failed", message: error.localizedDescription, success: false)
+                    self.displayAlert(title: "Save Failed", message: error.localizedDescription, success: false)
                 } else {
-                    self.locationManager.fetchGeofenceSettingsFromFirestore()
-                    self.triggerAlert(title: "Success", message: "Geofence rules updated successfully in production database.", success: true)
+                    LocationManager.shared.fetchGeofenceSettings()
+                    self.displayAlert(title: "Success", message: "Geofence config update ho gaya hai!", success: true)
                 }
             }
         }
     }
     
-    private func triggerAlert(title: String, message: String, success: Bool) {
+    private func displayAlert(title: String, message: String, success: Bool) {
         self.alertTitle = title
         self.alertMessage = message
         self.isSuccess = success

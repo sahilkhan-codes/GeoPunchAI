@@ -1,7 +1,5 @@
-import Foundation
 import CoreLocation
 import FirebaseFirestore
-import Combine
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
@@ -11,115 +9,53 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var isInsideGeofence: Bool = false
-    @Published var currentDistance: Double = 0.0
-    @Published var isLoadingGeofence: Bool = true
-    @Published var locationError: String?
+    @Published var currentDistance: CLLocationDistance = 0.0
     
-    // Dynamic Production Office Boundaries (Fetched from Firestore)
-    private var officeLocation: CLLocation?
-    private var allowedRadius: CLLocationDistance?
+    // Default fallback coordinates
+    private var officeLocation = CLLocation(latitude: 28.5355, longitude: 77.3910)
+    private var geofenceRadius: Double = 100.0 // meters
     
-    override private init() {
+    override init() {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.distanceFilter = 5 // Update every 5 meters movement
-        
-        fetchGeofenceSettingsFromFirestore()
-        requestLocationPermission()
-    }
-    
-    func requestLocationPermission() {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        
+        fetchGeofenceSettings()
     }
     
-    // MARK: - Firestore Dynamic Sync (Zero-Hardcoding)
-    
-    func fetchGeofenceSettingsFromFirestore() {
-        isLoadingGeofence = true
-        db.collection("settings").document("geofence").addSnapshotListener { [weak self] snapshot, error in
-            guard let self = self else { return }
+    func fetchGeofenceSettings() {
+        db.collection("settings").document("geofence").addSnapshotListener { snapshot, error in
+            guard let data = snapshot?.data(), error == nil else { return }
             
-            DispatchQueue.main.async {
-                self.isLoadingGeofence = false
-                
-                if let error = error {
-                    self.locationError = "Geofence sync failed: \(error.localizedDescription)"
-                    self.isInsideGeofence = false
-                    return
-                }
-                
-                if let data = snapshot?.data(), snapshot?.exists == true {
-                    guard let lat = data["latitude"] as? Double,
-                          let lng = data["longitude"] as? Double,
-                          let radius = data["radius"] as? Double else {
-                        self.locationError = "Invalid geofence schema in Firestore."
-                        self.isInsideGeofence = false
-                        return
-                    }
-                    
-                    self.officeLocation = CLLocation(latitude: lat, longitude: lng)
-                    self.allowedRadius = radius
-                    self.locationError = nil
+            if let lat = data["latitude"] as? Double,
+               let lon = data["longitude"] as? Double,
+               let radius = data["radius"] as? Double {
+                DispatchQueue.main.async {
+                    self.officeLocation = CLLocation(latitude: lat, longitude: lon)
+                    self.geofenceRadius = radius
                     self.reevaluateGeofence()
-                } else {
-                    self.locationError = "No office geofence configured by Admin."
-                    self.isInsideGeofence = false
                 }
             }
         }
     }
-    
-    // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let latestLocation = locations.last else { return }
-        
-        DispatchQueue.main.async {
-            self.userLocation = latestLocation.coordinate
-            self.calculateDistanceAndGeofence(userLoc: latestLocation)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        DispatchQueue.main.async {
-            self.locationError = "GPS Error: \(error.localizedDescription)"
-        }
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            manager.startUpdatingLocation()
-        case .denied, .restricted:
-            DispatchQueue.main.async {
-                self.locationError = "Location permission denied. Enable access in Settings."
-                self.isInsideGeofence = false
-            }
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        @unknown default:
-            break
-        }
-    }
-    
-    // MARK: - Geofence Calculation Logic
-    
-    private func calculateDistanceAndGeofence(userLoc: CLLocation) {
-        guard let officeLoc = officeLocation, let radius = allowedRadius else {
-            self.isInsideGeofence = false
-            return
-        }
-        
-        let distance = userLoc.distance(from: officeLoc)
-        self.currentDistance = distance
-        self.isInsideGeofence = distance <= radius
+        guard let location = locations.last else { return }
+        self.userLocation = location.coordinate
+        reevaluateGeofence()
     }
     
     private func reevaluateGeofence() {
         guard let userCoord = userLocation else { return }
-        let userLoc = CLLocation(latitude: userCoord.latitude, longitude: userCoord.longitude)
-        calculateDistanceAndGeofence(userLoc: userLoc)
+        let userCLLocation = CLLocation(latitude: userCoord.latitude, longitude: userCoord.longitude)
+        
+        // Calculate exact distance in meters
+        let distance = userCLLocation.distance(from: officeLocation)
+        self.currentDistance = distance
+        
+        // Inside condition: distance must be LESS THAN OR EQUAL TO radius
+        self.isInsideGeofence = (distance <= geofenceRadius)
     }
 }

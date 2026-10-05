@@ -4,7 +4,6 @@ struct RegisterView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var authManager = AuthManager.shared
     
-    // Parameter accept karne ke liye private nahi hona chahiye
     @State var selectedRole: UserRole = .employee
     @State private var name = ""
     @State private var email = ""
@@ -37,6 +36,7 @@ struct RegisterView: View {
                     TextField("Email Address", text: $email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
+                        .disableAutocorrection(true)
                         .padding()
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(10)
@@ -72,7 +72,7 @@ struct RegisterView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(isLoading ? Color.gray : Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
@@ -90,7 +90,10 @@ struct RegisterView: View {
     }
     
     private func handleRegister() {
-        guard !name.isEmpty, !email.isEmpty, !password.isEmpty else {
+        let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !cleanName.isEmpty, !cleanEmail.isEmpty, !password.isEmpty else {
             errorMessage = "Please fill in all details."
             return
         }
@@ -100,10 +103,15 @@ struct RegisterView: View {
             return
         }
         
+        guard password.count >= 6 else {
+            errorMessage = "Password must be at least 6 characters."
+            return
+        }
+        
         isLoading = true
         errorMessage = ""
         
-        authManager.register(name: name, email: email, password: password, role: selectedRole) { result in
+        authManager.register(name: cleanName, email: cleanEmail, password: password, role: selectedRole) { result in
             DispatchQueue.main.async {
                 self.isLoading = false
                 switch result {

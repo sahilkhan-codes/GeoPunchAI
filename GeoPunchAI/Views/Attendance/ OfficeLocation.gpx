@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Xcode">
+    <!-- Office Geofence Test Coordinates -->
+    <wpt lat="28.5355" lon="77.3910">
+        <name>Office Location</name>
+    </wpt>
+</gpx>

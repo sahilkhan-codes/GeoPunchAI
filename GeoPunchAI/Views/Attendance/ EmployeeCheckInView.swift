@@ -9,6 +9,9 @@ struct EmployeeCheckInView: View {
     
     @State private var isProcessingPunch = false
     @State private var faceDetected = false
+    @State private var activeLogId: String? = nil
+    @State private var activeCheckInTime: Date? = nil
+    @State private var isCheckingActiveStatus = true
     
     @State private var alertTitle = ""
     @State private var alertMessage = ""
@@ -43,11 +46,28 @@ struct EmployeeCheckInView: View {
                 }
                 .padding(.horizontal)
                 
+                // MARK: - Shift Status Banner
+                if let checkInTime = activeCheckInTime {
+                    HStack {
+                        Image(systemName: "clock.badge.checkmark.fill")
+                            .foregroundColor(.blue)
+                        Text("Active Shift Started: \(checkInTime, style: .time)")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                }
+                
                 // MARK: - Face Detection Camera Viewport
                 ZStack {
                     if locationManager.isInsideGeofence {
                         CameraPreviewHolder(faceDetected: $faceDetected)
-                            .frame(height: 360)
+                            .frame(height: 320)
                             .cornerRadius(16)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
@@ -56,11 +76,11 @@ struct EmployeeCheckInView: View {
                         
                         Ellipse()
                             .stroke(faceDetected ? Color.green : Color.white.opacity(0.8), style: StrokeStyle(lineWidth: 3, dash: [8]))
-                            .frame(width: 200, height: 260)
+                            .frame(width: 180, height: 240)
                         
                         VStack {
                             Spacer()
-                            Text(faceDetected ? "Face Aligned — Ready to Punch" : "Position face inside frame")
+                            Text(faceDetected ? "Face Aligned — Ready" : "Position face inside frame")
                                 .font(.caption)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
@@ -75,15 +95,15 @@ struct EmployeeCheckInView: View {
                             Image(systemName: "location.slash.fill")
                                 .font(.system(size: 44))
                                 .foregroundColor(.secondary)
-                            Text("Check-in Locked")
+                            Text("Check-in / Check-out Locked")
                                 .font(.headline)
-                            Text("You must enter the office geofence boundary to activate biometric check-in.")
+                            Text("You must enter the office geofence boundary to activate biometric operations.")
                                 .font(.caption)
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.secondary)
                                 .padding(.horizontal, 32)
                         }
-                        .frame(height: 360)
+                        .frame(height: 320)
                         .frame(maxWidth: .infinity)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(16)
@@ -94,28 +114,28 @@ struct EmployeeCheckInView: View {
                 Spacer()
                 
                 // MARK: - Action Punch Button
-                Button(action: recordAttendancePunch) {
+                Button(action: handlePunchAction) {
                     HStack {
                         Spacer()
-                        if isProcessingPunch {
+                        if isProcessingPunch || isCheckingActiveStatus {
                             ProgressView()
                                 .padding(.trailing, 8)
                         }
-                        Text(isProcessingPunch ? "Recording Punch..." : "Punch In / Check In")
+                        Text(buttonTitle)
                             .font(.headline)
                             .fontWeight(.bold)
                         Spacer()
                     }
                     .padding()
-                    .background((locationManager.isInsideGeofence && faceDetected && !isProcessingPunch) ? Color.blue : Color.gray)
+                    .background(buttonBackgroundColor)
                     .foregroundColor(.white)
                     .cornerRadius(12)
                 }
-                .disabled(!locationManager.isInsideGeofence || !faceDetected || isProcessingPunch)
+                .disabled(!locationManager.isInsideGeofence || !faceDetected || isProcessingPunch || isCheckingActiveStatus)
                 .padding(.horizontal)
                 .padding(.bottom, 12)
             }
-            .navigationTitle("Face Attendance")
+            .navigationTitle(activeLogId == nil ? "Face Check-In" : "Shift Check-Out")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -133,21 +153,69 @@ struct EmployeeCheckInView: View {
             } message: {
                 Text(alertMessage)
             }
+            .onAppear {
+                checkActiveShift()
+            }
         }
     }
     
-    private func recordAttendancePunch() {
+    // MARK: - Dynamic UI Helpers
+    private var buttonTitle: String {
+        if isCheckingActiveStatus {
+            return "Checking Shift Status..."
+        }
+        if isProcessingPunch {
+            return activeLogId == nil ? "Recording Punch In..." : "Recording Punch Out..."
+        }
+        return activeLogId == nil ? "Punch In / Check In" : "Punch Out / Check Out"
+    }
+    
+    private var buttonBackgroundColor: Color {
+        guard locationManager.isInsideGeofence && faceDetected && !isProcessingPunch && !isCheckingActiveStatus else {
+            return Color.gray
+        }
+        return activeLogId == nil ? Color.blue : Color.orange
+    }
+    
+    // MARK: - Firestore Operations
+    private func checkActiveShift() {
+        guard let userId = authManager.currentUserData?.id else {
+            isCheckingActiveStatus = false
+            return
+        }
+        
+        db.collection("attendance_logs")
+            .whereField("userId", isEqualTo: userId)
+            .whereField("status", isEqualTo: "ACTIVE")
+            .getDocuments { snapshot, error in
+                DispatchQueue.main.async {
+                    self.isCheckingActiveStatus = false
+                    if let doc = snapshot?.documents.first {
+                        self.activeLogId = doc.documentID
+                        if let timestamp = doc.get("checkInTime") as? Timestamp {
+                            self.activeCheckInTime = timestamp.dateValue()
+                        }
+                    }
+                }
+            }
+    }
+    
+    private func handlePunchAction() {
+        if activeLogId == nil {
+            recordPunchIn()
+        } else {
+            recordPunchOut()
+        }
+    }
+    
+    private func recordPunchIn() {
         guard let user = authManager.currentUserData, let userCoord = locationManager.userLocation else {
-            alertTitle = "Authentication Error"
-            alertMessage = "Unable to fetch user credentials or GPS metrics."
-            isSuccess = false
-            showAlert = true
+            showAlert(title: "Authentication Error", message: "Unable to fetch user credentials or GPS metrics.")
             return
         }
         
         isProcessingPunch = true
         
-        // Fix: Changed user.uid to user.id
         let attendanceRecord: [String: Any] = [
             "userId": user.id,
             "userName": user.name,
@@ -163,17 +231,41 @@ struct EmployeeCheckInView: View {
             DispatchQueue.main.async {
                 self.isProcessingPunch = false
                 if let error = error {
-                    self.alertTitle = "Punch Failed"
-                    self.alertMessage = error.localizedDescription
-                    self.isSuccess = false
+                    self.showAlert(title: "Punch In Failed", message: error.localizedDescription, success: false)
                 } else {
-                    self.alertTitle = "Attendance Recorded"
-                    self.alertMessage = "Face recognition and Geofence verified successfully."
-                    self.isSuccess = true
+                    self.showAlert(title: "Punch In Successful", message: "Welcome! Your shift has been started.", success: true)
                 }
-                self.showAlert = true
             }
         }
+    }
+    
+    private func recordPunchOut() {
+        guard let docId = activeLogId else { return }
+        
+        isProcessingPunch = true
+        
+        let updateData: [String: Any] = [
+            "checkOutTime": FieldValue.serverTimestamp(),
+            "status": "COMPLETED"
+        ]
+        
+        db.collection("attendance_logs").document(docId).updateData(updateData) { error in
+            DispatchQueue.main.async {
+                self.isProcessingPunch = false
+                if let error = error {
+                    self.showAlert(title: "Punch Out Failed", message: error.localizedDescription, success: false)
+                } else {
+                    self.showAlert(title: "Punch Out Successful", message: "Have a great day! Your shift has ended.", success: true)
+                }
+            }
+        }
+    }
+    
+    private func showAlert(title: String, message: String, success: Bool = false) {
+        self.alertTitle = title
+        self.alertMessage = message
+        self.isSuccess = success
+        self.showAlert = true
     }
 }
 
